@@ -1,0 +1,6 @@
+.card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
