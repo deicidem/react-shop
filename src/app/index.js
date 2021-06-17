@@ -25,7 +25,7 @@ import cartModel from '~s/cart'
         })
 
         return (
-            <Router>
+            <Router basename="/">
                 <div className="container">
                     <div className="row">
                         <div className="col col-sm-9">
