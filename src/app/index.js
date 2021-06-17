@@ -25,7 +25,7 @@ import cartModel from '~s/cart'
         })
 
         return (
-            <Router basename="/">
+            <Router basename="/react-shop/">
                 <div className="container">
                     <div className="row">
                         <div className="col col-sm-9">
