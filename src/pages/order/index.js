@@ -2,13 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Form, Button, Modal, ProgressBar, Table} from 'react-bootstrap';
 import {observer} from 'mobx-react';
-import orderModel from '~s/order';
-import cartModel from '~s/cart';
-import productsModel from '~s/products';
 import { routesMap } from '~/routes';
 import { Link } from 'react-router-dom';
-
-@observer class Order extends React.Component{
+import withStore from '~/hocs/withStore';
+class Order extends React.Component{
     state = {
         showModal: false,
         progress: null
@@ -27,6 +24,7 @@ import { Link } from 'react-router-dom';
         this.props.history.push(routesMap.result);
     }
     countProgress = (...args) => {
+        let orderModel = this.props.store.order;
         let progress = 0;
         for (const name in orderModel.formData) {
             let field = orderModel.formData[name];
@@ -41,10 +39,13 @@ import { Link } from 'react-router-dom';
         }
     }
     onChange = (name, value) => {
-        orderModel.change(name, value)
+        this.props.store.order.change(name, value)
         this.countProgress(1);
     }
     render(){
+        let orderModel = this.props.store.order;
+        let cartModel = this.props.store.cart;
+        let productsModel = this.props.store.products;
         let formFields = [];
         let infoList = [];
         for(let name in orderModel.formData){
@@ -149,4 +150,4 @@ import { Link } from 'react-router-dom';
     }
 }
 
-export default Order;
+export default withStore(Order);

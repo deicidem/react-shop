@@ -3,8 +3,11 @@ import { observer } from 'mobx-react';
 import AppProduct from '~c/product';
 import cartModel from '~s/cart';
 import productsModel from '~s/products';
-@observer class Products extends React.Component {
+import withStore from '~/hocs/withStore';
+class Products extends React.Component {
   render() {
+    let productsModel = this.props.store.products;
+    let cartModel = this.props.store.cart;
     let productsList = productsModel.products.map((el, i) => {
       return (
         <div key={el.id} className="col col-4">
@@ -27,4 +30,4 @@ import productsModel from '~s/products';
   }
 }
 
-export default Products;
+export default withStore(Products);

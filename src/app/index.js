@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './app.css';
-import {observer} from 'mobx-react';
+import {observer, Provider} from 'mobx-react';
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
 import routes from '~/routes';
 import {routesMap, menu} from '~/routes';
 import { ListGroup } from 'react-bootstrap';
-import cartModel from '~s/cart'
+import store from '~s'
 @observer class App extends React.Component{
     state = {
         menuList: [...menu]
     }
     render(){
+        console.log(store.cart);
         let routesComponents = routes.map((route) => {
             return <Route path={route.url}
                           component={route.component}
@@ -25,6 +26,7 @@ import cartModel from '~s/cart'
         })
 
         return (
+            <Provider store={store}>
             <Router basename="/react-shop/">
                 <div className="container">
                     <div className="row">
@@ -33,7 +35,7 @@ import cartModel from '~s/cart'
                         </div>
                         <div className="col col-sm-3">
                             <div className="alert alert-default">
-                                In cart: {cartModel.products.length}
+                                In cart: {store.cart.products.length}
                             </div>
                         </div>
                     </div>
@@ -55,6 +57,7 @@ import cartModel from '~s/cart'
                     
                 </div>
             </Router>
+            </Provider>
         )
     }
 }

@@ -1,7 +1,10 @@
 import {observable, computed, action} from 'mobx';
-import productsModel from '~s/products';
-class Cart{
+export default class{
     @observable products = []
+
+    constructor(store) {
+        this.globalStore = store;
+    }
 
     @computed get inCart() {
         return (id) => {
@@ -17,7 +20,7 @@ class Cart{
     }
 
     @computed get total(){
-        return this.products.reduce((t, pr) => t + productsModel.productByID(pr.id).price * pr.current, 0);
+        return this.products.reduce((t, pr) => t + this.globalStore.products.productByID(pr.id).price * pr.current, 0);
     }
 
     @computed get changeOn(){
@@ -55,10 +58,6 @@ class Cart{
     }
 
 }
-
-export default new Cart();
-
-
 
 
 

@@ -1,12 +1,13 @@
 import React from 'react';
-import cartModel from '~s/cart';
-import productsModel from '~s/products';
 import { Link } from 'react-router-dom';
 import {routesMap} from "~/routes";
 import {Button} from "react-bootstrap";
 import { observer } from 'mobx-react';
-@observer class Product extends React.Component {
+import withStore from '~/hocs/withStore';
+class Product extends React.Component {
   render() {
+    let cartModel = this.props.store.cart;
+    let productsModel = this.props.store.products;
     let product = productsModel.productByID(this.props.match.params.id)
     return (
       <div>
@@ -34,4 +35,4 @@ import { observer } from 'mobx-react';
   }
 }
 
-export default Product;
+export default withStore(Product);

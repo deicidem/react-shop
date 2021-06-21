@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import AppMinMax from '~c/inputs/minmax';
 import {Button} from 'react-bootstrap'
-import {observer} from 'mobx-react';
-import cartModel from '~s/cart.js';
-import productsModel from '~s/products';
 import { routesMap } from '~/routes';
 import { Link } from 'react-router-dom';
-
-@observer class Cart extends React.Component{
+import withStore from '~/hocs/withStore';
+class Cart extends React.Component{
     render(){
+        let cartModel = this.props.store.cart;
+        let productsModel = this.props.store.products;
         let productsRows = cartModel.products.map((el, i) => {
             let product = productsModel.productByID(el.id);
             return (
@@ -60,4 +58,4 @@ import { Link } from 'react-router-dom';
     }
 }
 
-export default Cart;
+export default withStore(Cart);

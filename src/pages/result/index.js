@@ -1,20 +1,12 @@
 import React from 'react';
 
-import cartModel from '~s/cart.js';
-import orderModel from '~s/order.js';
-
 import { urlBuilder } from '~/routes';
 import { Link } from 'react-router-dom';
-
-export default class extends React.Component{
+import withStore from '~/hocs/withStore';
+class Result extends React.Component{
     render(){
-        let postsTmp = [1, 2, 3];
-        let links = postsTmp.map(post => {
-            return <div key={post}>
-                <Link to={urlBuilder('blogPost', {some: post})}>Post {post}</Link>
-            </div>
-        });
-
+        let orderModel = this.props.store.order;
+        let cartModel  = this.props.store.cart;
         return (
             <div>
                 <h2>Congratulations!</h2>
@@ -24,3 +16,5 @@ export default class extends React.Component{
         )
     }
 }
+
+export default withStore(Result);

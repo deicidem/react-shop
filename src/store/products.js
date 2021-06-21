@@ -1,7 +1,7 @@
 import {observable, computed, action} from 'mobx';
 
-class Products {
-  @observable products = getProducts()
+export default class {
+  @observable products =  getProducts()
 
   @computed get productByID() {
     return (id) => {
@@ -16,8 +16,6 @@ class Products {
     }
   }
 }
-
-export default new Products();
 
 
 
